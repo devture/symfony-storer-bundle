@@ -17,7 +17,7 @@
 	},
 	"suggest": {
 		"aws/aws-sdk-php": "Allows using Amazon S3 or Minio storage",
-		"microsoft/windowsazure": "Allows using Azure Blob Storage"
+		"microsoft/azure-storage-blob": "Allows using Azure Blob Storage"
 	},
 	"autoload": {
 		"psr-4": {
