@@ -1,0 +1,13 @@
+{
+	"devture_storer": {
+		"validation_error": {
+			"unknown_file_extension": "The provided file has as an unknown file extension.",
+			"invalid_file_extension": "The provided file has an extension (%currentExtension%), which is not valid. Expected one of: %allowedExtensions%.",
+			"invalid_file_extension_non_explanatory": "The provided file has an extension (%currentExtension%), which is not allowed.",
+			"invalid_image_file": "The provided image file is invalid.",
+
+			"maximum_size_excedeed": "The provided file has a size of %size% MB, which is more than the allowed maximum (%max% MB).",
+			"file_uploaded_with_errors": "Errors occurred while handling file upload. File may be larger than what we can accept."
+		}
+	}
+}

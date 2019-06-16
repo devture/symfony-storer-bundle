@@ -1,0 +1,27 @@
+{
+	"name": "devture/symfony-storer-bundle",
+	"type": "symfony-bundle",
+	"description": "Symfony bundle that lets you deal with uploaded files in a relatively sane and storage-provider-independent way",
+	"keywords": ["symfony", "bundle", "storage", "filesystem", "s3", "azure"],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Slavi Pantaleev",
+			"email": "slavi@devture.com"
+		}
+	],
+	"require": {
+		"php": ">=7.1",
+		"dflydev/apache-mime-types": "1.0.*",
+		"doctrine/orm": "^2.6"
+	},
+	"suggest": {
+		"aws/aws-sdk-php": "Allows using Amazon S3 or Minio storage",
+		"microsoft/windowsazure": "Allows using Azure Blob Storage"
+	},
+	"autoload": {
+		"psr-4": {
+			"Devture\\Bundle\\StorerBundle\\": ""
+		}
+	}
+}

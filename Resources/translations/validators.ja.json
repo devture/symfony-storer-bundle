@@ -1,0 +1,12 @@
+{
+	"devture_storer": {
+		"validation_error": {
+			"file_uploaded_with_errors": "ファイルのアップロード中にエラーが発生しました。ファイルの容量が制限を超えている可能性があります。",
+			"invalid_file_extension": "この添付ファイルの拡張子(%currentExtension%)は無効です。有効な拡張子は次の通りです( %allowedExtensions% )",
+			"invalid_file_extension_non_explanatory": "この拡張子 (%currentExtension%) のフォーマットは許可されていません。",
+			"invalid_image_file": "無効な画像ファイルです",
+			"maximum_size_excedeed": "アップロードしようとしたファイル(%size% MB)はサイズ制限 (%max% MB)を超えています",
+			"unknown_file_extension": "不明なファイル拡張子です"
+		}
+	}
+}

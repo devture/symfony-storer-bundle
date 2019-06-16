@@ -1,0 +1,29 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Devture\Bundle\StorerBundle\:
+        resource: '../../*'
+        exclude: '../../{Entity,Model,Migrations,Tests}'
+
+    storer.adapter:
+      class: Gaufrette\Adapter
+      factory: 'Devture\Bundle\StorerBundle\Helper\AdapterFactory:create'
+      arguments: ['%devture_storer_adapter_url%']
+
+    storer.filesystem:
+      class: Gaufrette\Filesystem
+      arguments: ['@storer.adapter']
+
+    Devture\Bundle\StorerBundle\Helper\Storer:
+      arguments:
+        $filesystem: '@storer.filesystem'
+
+    Devture\Bundle\StorerBundle\Listener\EventSubscriber:
+      tags: ['doctrine.event_subscriber']
+
+    Devture\Bundle\StorerBundle\Validator\Constraints\MaximumSizeValidator:
+      arguments:
+        $defaultMaxSizeMegabytes: '%devture_storer_validation_max_size_megabytes%'

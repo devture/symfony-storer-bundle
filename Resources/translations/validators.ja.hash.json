@@ -1,0 +1,8 @@
+{
+	"devture_storer.validation_error.file_uploaded_with_errors": "41b2c94a2cc5ed555c4d181b3ed84c8d48583c1986f4f5c5c38b5bd886371e20",
+	"devture_storer.validation_error.invalid_file_extension": "fd52a24d9897ccc4836f8b7487a7cae87d01bbdee68b0fc1aafffd1f61d203a7",
+	"devture_storer.validation_error.invalid_file_extension_non_explanatory": "84121c83dfc57a8916a47d9a60c88024545820a3e64b4929c5e85c3cdb10c633",
+	"devture_storer.validation_error.invalid_image_file": "7c949d33debcb328d9a17a4ee9cb0f20dad615d94b5cb7a00d2cfbccb85910a0",
+	"devture_storer.validation_error.maximum_size_excedeed": "037ea97736b50b36fb02e0fb74293140fa34b9afc6fe596f5d0243c2c05019fc",
+	"devture_storer.validation_error.unknown_file_extension": "977af08b6798da2e646609df08a054d4ab5022de2e58b02f262ac7bbff2c4d73"
+}
