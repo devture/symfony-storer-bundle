@@ -54,7 +54,7 @@ Example (`.env`):
 #
 # Example of actual Azure Blob URL:
 #	DEVTURE_STORER_ADAPTER_URL=azure-blob://account-name:account-key%%2Fwith%%2Furlencoded%%2Fslashes@account.blob.core.windows.net/container
-DEVTURE_STORER_ADAPTER_URL=file://%kernel.project_dir%/var/storer
+DEVTURE_STORER_ADAPTER_URL=file://%kernel.project_dir%/var/devture-storer
 ```
 
 You also need to register a Doctrine type like this (in `config/doctrine.yaml`):
