@@ -17,7 +17,9 @@
 	},
 	"suggest": {
 		"aws/aws-sdk-php": "Allows using Amazon S3 or Minio storage",
-		"microsoft/azure-storage-blob": "Allows using Azure Blob Storage"
+		"microsoft/azure-storage-blob": "Allows using Azure Blob Storage",
+		"symfony/validator": "To use the validation constraints",
+		"imagine/imagine": "To use the image-validation constraints"
 	},
 	"autoload": {
 		"psr-4": {
