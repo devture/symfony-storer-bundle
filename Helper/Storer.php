@@ -96,4 +96,21 @@ class Storer {
 		$file->setStorerFileHandle($fileHandle);
 	}
 
+	/**
+	 * @return FileInterface[]
+	 */
+	public function getFilesByPrefix(string $prefix): array {
+		$result = $this->filesystem->listKeys($prefix);
+
+		return array_map(function (string $key): FileInterface {
+			return new \Devture\Bundle\StorerBundle\Entity\File($key);
+		}, $result['keys']);
+	}
+
+	public function deleteFilesByPrefix(string $prefix): void {
+		foreach ($this->getFilesByPrefix($prefix) as $file) {
+			$this->delete($file);
+		}
+	}
+
 }
