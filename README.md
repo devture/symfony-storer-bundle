@@ -32,7 +32,7 @@ Drop the following config in `config/packages/devture_storer.yaml`
 
 ```yaml
 devture_storer:
-  adapter_uri: '%env(resolve:DEVTURE_STORER_ADAPTER_URL)%'
+  adapter_url: '%env(resolve:DEVTURE_STORER_ADAPTER_URL)%'
   validation_max_size_megabytes: 20
 ```
 
