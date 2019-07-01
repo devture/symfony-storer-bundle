@@ -3,7 +3,80 @@ namespace Devture\Bundle\StorerBundle;
 
 class Util {
 
-	public static function getExtensionByFileName(string $fileName): ?string {
+	/**
+	 * Makes a filename safe for filesystem use.
+	 *
+	 * Source: https://stackoverflow.com/a/42058764
+	 */
+	static public function filterFileName(string $fileName, bool $beautify = true): string {
+		// sanitize filename
+		$fileName = preg_replace(
+			'~
+			[<>:"/\\|?*]|            # file system reserved https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
+			[\x00-\x1F]|             # control characters http://msdn.microsoft.com/en-us/library/windows/desktop/aa365247%28v=vs.85%29.aspx
+			[\x7F\xA0\xAD]|          # non-printing characters DEL, NO-BREAK SPACE, SOFT HYPHEN
+			[#\[\]@!$&\'()+,;=]|     # URI reserved https://tools.ietf.org/html/rfc3986#section-2.2
+			[{}^\~`]                 # URL unsafe characters https://www.ietf.org/rfc/rfc1738.txt
+			~x',
+			'-',
+			$fileName
+		);
+
+		// avoids ".", ".." or ".hiddenFiles"
+		$fileName = ltrim($fileName, '.-');
+
+		// optional beautification
+		if ($beautify) {
+			$fileName = static::beautifyFileName($fileName);
+		}
+
+		// maximize filename length to 255 bytes http://serverfault.com/a/9548/44086
+		$ext = pathinfo($fileName, PATHINFO_EXTENSION);
+		$fileName = mb_strcut(pathinfo($fileName, PATHINFO_FILENAME), 0, 255 - ($ext ? strlen($ext) + 1 : 0), mb_detect_encoding($fileName)) . ($ext ? '.' . $ext : '');
+		return $fileName;
+	}
+
+	/**
+	 * Makes a filename prettier/cleaner.
+	 *
+	 * Source: https://stackoverflow.com/a/42058764
+	 */
+	static public function beautifyFileName(string $fileName): string {
+		// reduce consecutive characters
+		$fileName = preg_replace(
+			[
+				// "file   name.zip" becomes "file-name.zip"
+				'/ +/',
+				// "file___name.zip" becomes "file-name.zip"
+				'/_+/',
+				// "file---name.zip" becomes "file-name.zip"
+				'/-+/'
+			],
+			'-',
+			$fileName
+		);
+
+		$fileName = preg_replace(
+			[
+			// "file--.--.-.--name.zip" becomes "file.name.zip"
+			'/-*\.-*/',
+			// "file...name..zip" becomes "file.name.zip"
+			'/\.{2,}/'
+			],
+			'.',
+			$fileName
+		);
+
+		// lowercase for windows/unix interoperability http://support.microsoft.com/kb/100625
+		$fileName = mb_strtolower($fileName, mb_detect_encoding($fileName));
+
+		// ".file-name.-" becomes "file-name"
+		$fileName = trim($fileName, '.-');
+
+		return $fileName;
+	}
+
+	static public function getExtensionByFileName(string $fileName): ?string {
 		$parts = explode('.', $fileName);
 		if (count($parts) === 1) {
 			return null;
@@ -50,7 +123,7 @@ class Util {
 		return $extension;
 	}
 
-	public static function getContentTypeByFileName(string $fileName): ?string {
+	static public function getContentTypeByFileName(string $fileName): ?string {
 		static $mimeTypeRepository;
 		if ($mimeTypeRepository === null) {
 			$mimeTypeRepository = new \Dflydev\ApacheMimeTypes\PhpRepository();
@@ -71,7 +144,7 @@ class Util {
 		return $type;
 	}
 
-	public static function generateFullStorageKey(string $storagePrefix, string $originalName): string {
+	static public function generateFullStorageKey(string $storagePrefix, string $originalName): string {
 		$extension = self::getExtensionByFileName($originalName);
 		$extensionSuffix = ($extension ? sprintf('.%s', $extension) : '');
 
@@ -86,7 +159,7 @@ class Util {
 		);
 	}
 
-	public static function getThumbnailExtensionByFileName(string $fileName): ?string {
+	static public function getThumbnailExtensionByFileName(string $fileName): ?string {
 		$extension = self::getExtensionByFileName($fileName);
 		if ($extension === 'png') {
 			return 'png';
